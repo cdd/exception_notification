@@ -63,13 +63,6 @@ module ExceptionNotifiable
       !self.class.local_addresses.detect { |addr| addr.include?(remote) }.nil?
     end
 
-    def render_404
-      respond_to do |type|
-        type.html { render :file => "#{RAILS_ROOT}/public/404.html", :status => "404 Not Found" }
-        type.all  { render :nothing => true, :status => "404 Not Found" }
-      end
-    end
-
     def render_500
       respond_to do |type|
         type.html { render :file => "#{RAILS_ROOT}/public/500.html", :status => "500 Error" }
@@ -80,8 +73,8 @@ module ExceptionNotifiable
     def rescue_action_in_public(exception)
       case exception
         when *self.class.exceptions_to_treat_as_404
-          render_404
-
+          # we want to use our own render_missing instead of render_404 (which we deleted), since it includes logging of the 404
+          render_missing
         else          
           render_500
 

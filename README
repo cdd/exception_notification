@@ -1,4 +1,11 @@
-= Exception Notifier Plugin for Rails
+= Exception Notifier Plugin for Rails with CDD Modifications
+
+This fork is really only for CDD's benefit. We have a render_missing
+method on our application that we'd rather use (instead of render_404).
+We also fixed the sole test in the process, sadly we did not add other
+tests.
+
+== Original README below
 
 The Exception Notifier plugin provides a mailer object and a default set of
 templates for sending email notifications when errors occur in a Rails
